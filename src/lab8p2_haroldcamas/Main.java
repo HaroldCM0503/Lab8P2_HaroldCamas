@@ -4,12 +4,18 @@
  */
 package lab8p2_haroldcamas;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,8 +27,71 @@ public class Main extends javax.swing.JFrame {
     /**
      * Creates new form Main
      */
-    public Main() {
+    public Main() throws FileNotFoundException, IOException, ClassNotFoundException {
         initComponents();
+        
+        FileInputStream fo = null;
+        ObjectInputStream os = null;
+        
+        File paisesA = new File("./PaisesParticipantes.UWU");
+        File eventosA = new File("./Eventos.UWU");
+        File nadadoresA = new File("./Nadadores.UWU");
+        
+        try {
+            if(paisesA.exists()){
+            Pais temp = null;
+            fo = new FileInputStream(paisesA);
+            os = new ObjectInputStream(fo);
+            
+            try {
+                while ((temp = (Pais) os.readObject()) != null) {
+                    paises.add(temp);
+                }
+            } catch (EOFException e) {
+            }
+            fo.close();
+            os.close();
+        }
+        } catch (Exception e) {
+        }
+        
+        try {
+            if(eventosA.exists()){
+            Evento temp = null;
+            fo = new FileInputStream(eventosA);
+            os = new ObjectInputStream(fo);
+            
+            try {
+                while ((temp = (Evento) os.readObject()) != null) {
+                    eventos.add(temp);
+                }
+            } catch (EOFException e) {
+            }
+            fo.close();
+            os.close();
+        }
+        } catch (Exception e) {
+        }
+        
+        try {
+            if(nadadoresA.exists()){
+            Nadador temp = null;
+            fo = new FileInputStream(eventosA);
+            os = new ObjectInputStream(fo);
+            
+            try {
+                while ((temp = (Nadador) os.readObject()) != null) {
+                    nadadores.add(temp);
+                }
+            } catch (EOFException e) {
+            }
+            fo.close();
+            os.close();
+        }
+        } catch (Exception e) {
+        }
+        
+        cb_nacionalidad.setModel(refrescarModelo(paises, (DefaultComboBoxModel) cb_nacionalidad.getModel()));
     }
 
     /**
@@ -349,10 +418,12 @@ public class Main extends javax.swing.JFrame {
             ObjectOutputStream os = null;
             
             try {
-                fo = new FileOutputStream(file,true);
-                os = new ObjectOutputStream(fo);
+                for (Pais paise : paises) {
+                    fo = new FileOutputStream(file,true);
+                    os = new ObjectOutputStream(fo);
+                    os.writeObject(paise);
+                }
                 
-                os.writeObject(p);
                 os.flush();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -366,6 +437,7 @@ public class Main extends javax.swing.JFrame {
             tf_nombrePais.setText("");
             sp_medallasPais.getModel().setValue(0);
             JOptionPane.showMessageDialog(this, "Pais añadido exitosamente!");
+            cb_nacionalidad.setModel(refrescarModelo(paises, (DefaultComboBoxModel) cb_nacionalidad.getModel()));
         }
     }//GEN-LAST:event_bt_añadirPaisMouseClicked
 
@@ -383,10 +455,12 @@ public class Main extends javax.swing.JFrame {
             FileOutputStream fo = null;
             ObjectOutputStream os = null;
             try {
-                fo = new FileOutputStream(file,true);
-                os = new ObjectOutputStream(fo);
+                for (Evento evento : eventos) {
+                    fo = new FileOutputStream(file,true);
+                    os = new ObjectOutputStream(fo);
+                    os.writeObject(evento);
+                }
                 
-                os.writeObject(e);
                 os.flush();
             } catch (Exception e2) {
                 e2.printStackTrace();
@@ -425,15 +499,18 @@ public class Main extends javax.swing.JFrame {
                     (double) sp_recordNadador.getModel().getValue(), 
                     (int) sp_medallasNadador.getModel().getValue());
                 nadadores.add(n);
+                ((Pais) cb_nacionalidad.getSelectedItem()).getNadadores().add(n);
 
                 File file = new File("./Nadadores.UWU");
                 FileOutputStream fo = null;
                 ObjectOutputStream os = null;
                 try {
-                    fo = new FileOutputStream(file,true);
-                    os = new ObjectOutputStream(fo);
-
-                    os.writeObject(n);
+                    for (Nadador nadadore : nadadores) {
+                        fo = new FileOutputStream(file,true);
+                        os = new ObjectOutputStream(fo);
+                        os.writeObject(nadadore);
+                    }
+                    
                     os.flush();
                 } catch (Exception e2) {
                     e2.printStackTrace();
@@ -487,7 +564,13 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+                try {
+                    new Main().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -495,12 +578,21 @@ public class Main extends javax.swing.JFrame {
     public static int contarEstilos(Pais p,String estilo){
         int cc = 0;
         for (Nadador nadador : p.getNadadores()) {
-            if(nadador.getEstilo().equals(estilo)){
+            if(nadador.getEstilo() == estilo){
                 cc ++;
             }
         }
         return cc;
     }
+    
+    public static DefaultComboBoxModel refrescarModelo(ArrayList lista, DefaultComboBoxModel modelo){
+        modelo.removeAllElements();
+        for (Object object : lista) {
+            modelo.addElement(object);
+        }
+        return modelo;
+    }
+    
     ArrayList<Pais> paises = new ArrayList();
     ArrayList<Nadador> nadadores = new ArrayList();
     ArrayList<Evento> eventos = new ArrayList();
