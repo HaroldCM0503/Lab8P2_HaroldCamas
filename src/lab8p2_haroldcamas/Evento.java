@@ -1,11 +1,13 @@
 package lab8p2_haroldcamas;
 
-public class Evento {
+import java.io.Serializable;
+
+public class Evento implements Serializable{
     private String estilo;
     private String distancia;
     private double record;
 
-    public Evento() {
+    public Evento(){
     }
 
     public Evento(String estilo, String distancia, double record) {

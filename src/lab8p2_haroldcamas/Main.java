@@ -4,6 +4,14 @@
  */
 package lab8p2_haroldcamas;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author harol
@@ -27,78 +35,119 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
+        jp_añadirPais = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        tf_nombrePais = new javax.swing.JTextField();
+        sp_medallasPais = new javax.swing.JSpinner();
+        bt_añadirPais = new javax.swing.JButton();
+        jp_añadirEvento = new javax.swing.JPanel();
+        jp_añadirNadador = new javax.swing.JPanel();
+        jp_listar = new javax.swing.JPanel();
+        jp_simulacion = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jLabel1.setText("Nombre");
+
+        jLabel2.setText("Medallas");
+
+        bt_añadirPais.setText("Añadir Pais");
+        bt_añadirPais.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_añadirPaisMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jp_añadirPaisLayout = new javax.swing.GroupLayout(jp_añadirPais);
+        jp_añadirPais.setLayout(jp_añadirPaisLayout);
+        jp_añadirPaisLayout.setHorizontalGroup(
+            jp_añadirPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_añadirPaisLayout.createSequentialGroup()
+                .addGroup(jp_añadirPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jp_añadirPaisLayout.createSequentialGroup()
+                        .addGap(118, 118, 118)
+                        .addGroup(jp_añadirPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(100, 100, 100)
+                        .addGroup(jp_añadirPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tf_nombrePais, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                            .addComponent(sp_medallasPais)))
+                    .addGroup(jp_añadirPaisLayout.createSequentialGroup()
+                        .addGap(152, 152, 152)
+                        .addComponent(bt_añadirPais, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(409, Short.MAX_VALUE))
+        );
+        jp_añadirPaisLayout.setVerticalGroup(
+            jp_añadirPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_añadirPaisLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(jp_añadirPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(tf_nombrePais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(59, 59, 59)
+                .addGroup(jp_añadirPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(sp_medallasPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(86, 86, 86)
+                .addComponent(bt_añadirPais, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(155, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Agregar Pais", jp_añadirPais);
+
+        javax.swing.GroupLayout jp_añadirEventoLayout = new javax.swing.GroupLayout(jp_añadirEvento);
+        jp_añadirEvento.setLayout(jp_añadirEventoLayout);
+        jp_añadirEventoLayout.setHorizontalGroup(
+            jp_añadirEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 801, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jp_añadirEventoLayout.setVerticalGroup(
+            jp_añadirEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 469, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Agregar Pais", jPanel1);
+        jTabbedPane1.addTab("Agregar Evento", jp_añadirEvento);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jp_añadirNadadorLayout = new javax.swing.GroupLayout(jp_añadirNadador);
+        jp_añadirNadador.setLayout(jp_añadirNadadorLayout);
+        jp_añadirNadadorLayout.setHorizontalGroup(
+            jp_añadirNadadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 801, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jp_añadirNadadorLayout.setVerticalGroup(
+            jp_añadirNadadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 469, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Agregar Evento", jPanel2);
+        jTabbedPane1.addTab("Agregar Nadador", jp_añadirNadador);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jp_listarLayout = new javax.swing.GroupLayout(jp_listar);
+        jp_listar.setLayout(jp_listarLayout);
+        jp_listarLayout.setHorizontalGroup(
+            jp_listarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 801, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jp_listarLayout.setVerticalGroup(
+            jp_listarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 469, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Agregar Nadador", jPanel3);
+        jTabbedPane1.addTab("Listar", jp_listar);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jp_simulacionLayout = new javax.swing.GroupLayout(jp_simulacion);
+        jp_simulacion.setLayout(jp_simulacionLayout);
+        jp_simulacionLayout.setHorizontalGroup(
+            jp_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 801, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jp_simulacionLayout.setVerticalGroup(
+            jp_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 469, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Listar", jPanel4);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 801, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Simulacion", jPanel5);
+        jTabbedPane1.addTab("Simulacion", jp_simulacion);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,6 +162,39 @@ public class Main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bt_añadirPaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_añadirPaisMouseClicked
+        if(tf_nombrePais.getText().equals("") || (int) sp_medallasPais.getModel().getValue() < 0){
+            JOptionPane.showMessageDialog(this, "Tiene que llenar todas las casillas!");
+        }
+        else{
+            Pais p = new Pais(tf_nombrePais.getText(), 
+                    (int) sp_medallasPais.getModel().getValue());
+            paises.add(p);
+            File file = new File("./PaisesParticipantes");
+            FileOutputStream fo = null;
+            ObjectOutputStream os = null;
+            
+            try {
+                fo = new FileOutputStream(file,true);
+                os = new ObjectOutputStream(fo);
+                
+                os.writeObject(p);
+                os.flush();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                fo.close();
+                os.close();
+            } catch (Exception e) {
+            }
+            
+            tf_nombrePais.setText("");
+            sp_medallasPais.getModel().setValue(0);
+            JOptionPane.showMessageDialog(this, "Pais añadido exitosamente!");
+        }
+    }//GEN-LAST:event_bt_añadirPaisMouseClicked
 
     /**
      * @param args the command line arguments
@@ -148,13 +230,21 @@ public class Main extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    ArrayList<Pais> paises = new ArrayList();
+    ArrayList<Nadador> nadadores = new ArrayList();
+    ArrayList<Evento> eventos = new ArrayList();
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
+    private javax.swing.JButton bt_añadirPais;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPanel jp_añadirEvento;
+    private javax.swing.JPanel jp_añadirNadador;
+    private javax.swing.JPanel jp_añadirPais;
+    private javax.swing.JPanel jp_listar;
+    private javax.swing.JPanel jp_simulacion;
+    private javax.swing.JSpinner sp_medallasPais;
+    private javax.swing.JTextField tf_nombrePais;
     // End of variables declaration//GEN-END:variables
 }
