@@ -50,6 +50,23 @@ public class Main extends javax.swing.JFrame {
         sp_recordEvento = new javax.swing.JSpinner();
         bt_añadirEvento = new javax.swing.JButton();
         jp_añadirNadador = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        tf_nombreNadador = new javax.swing.JTextField();
+        cb_nacionalidad = new javax.swing.JComboBox<>();
+        sp_edad = new javax.swing.JSpinner();
+        sp_estatura = new javax.swing.JSpinner();
+        cb_estiloNadador = new javax.swing.JComboBox<>();
+        cb_distanciaNadador = new javax.swing.JComboBox<>();
+        sp_recordNadador = new javax.swing.JSpinner();
+        sp_medallasNadador = new javax.swing.JSpinner();
+        bt_añadirNadador = new javax.swing.JButton();
         jp_listar = new javax.swing.JPanel();
         jp_simulacion = new javax.swing.JPanel();
 
@@ -169,15 +186,111 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Agregar Evento", jp_añadirEvento);
 
+        jLabel6.setText("Nombre");
+
+        jLabel7.setText("Nacionalidad");
+
+        jLabel8.setText("Edad");
+
+        jLabel9.setText("Estatura");
+
+        jLabel10.setText("Estilo");
+
+        jLabel11.setText("Distancia");
+
+        jLabel12.setText("Record");
+
+        jLabel13.setText("Medallas");
+
+        sp_edad.setModel(new javax.swing.SpinnerNumberModel(18, 18, null, 1));
+
+        sp_estatura.setModel(new javax.swing.SpinnerNumberModel(1.0d, 1.0d, 3.0d, 0.1d));
+
+        cb_estiloNadador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Libre", "Pecho", "Dorso", "Mariposa" }));
+
+        cb_distanciaNadador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "100m", "200m", "400m", "800m" }));
+
+        sp_recordNadador.setModel(new javax.swing.SpinnerNumberModel(1.0d, 0.1d, null, 0.5d));
+
+        sp_medallasNadador.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
+        bt_añadirNadador.setText("Añadir Nadador");
+        bt_añadirNadador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_añadirNadadorMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jp_añadirNadadorLayout = new javax.swing.GroupLayout(jp_añadirNadador);
         jp_añadirNadador.setLayout(jp_añadirNadadorLayout);
         jp_añadirNadadorLayout.setHorizontalGroup(
             jp_añadirNadadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 801, Short.MAX_VALUE)
+            .addGroup(jp_añadirNadadorLayout.createSequentialGroup()
+                .addGroup(jp_añadirNadadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jp_añadirNadadorLayout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addGroup(jp_añadirNadadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13))
+                        .addGap(138, 138, 138)
+                        .addGroup(jp_añadirNadadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tf_nombreNadador)
+                            .addComponent(cb_nacionalidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(sp_edad)
+                            .addComponent(sp_estatura)
+                            .addComponent(cb_estiloNadador, 0, 99, Short.MAX_VALUE)
+                            .addComponent(cb_distanciaNadador, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(sp_recordNadador)
+                            .addComponent(sp_medallasNadador)))
+                    .addGroup(jp_añadirNadadorLayout.createSequentialGroup()
+                        .addGap(211, 211, 211)
+                        .addComponent(bt_añadirNadador, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(354, Short.MAX_VALUE))
         );
         jp_añadirNadadorLayout.setVerticalGroup(
             jp_añadirNadadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
+            .addGroup(jp_añadirNadadorLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(jp_añadirNadadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(tf_nombreNadador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jp_añadirNadadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(cb_nacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jp_añadirNadadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(sp_edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jp_añadirNadadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(sp_estatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jp_añadirNadadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(cb_estiloNadador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jp_añadirNadadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(cb_distanciaNadador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jp_añadirNadadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(sp_recordNadador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jp_añadirNadadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(sp_medallasNadador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(bt_añadirNadador, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Agregar Nadador", jp_añadirNadador);
@@ -212,7 +325,7 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,7 +344,7 @@ public class Main extends javax.swing.JFrame {
                     (int) sp_medallasPais.getModel().getValue());
             paises.add(p);
             
-            File file = new File("./PaisesParticipantes");
+            File file = new File("./PaisesParticipantes.UWU");
             FileOutputStream fo = null;
             ObjectOutputStream os = null;
             
@@ -266,7 +379,7 @@ public class Main extends javax.swing.JFrame {
                     (double) sp_recordEvento.getModel().getValue());
             eventos.add(e);
             
-            File file = new File("./Eventos");
+            File file = new File("./Eventos.UWU");
             FileOutputStream fo = null;
             ObjectOutputStream os = null;
             try {
@@ -290,6 +403,59 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Evento añadido exitosamente!");
         }
     }//GEN-LAST:event_bt_añadirEventoMouseClicked
+
+    private void bt_añadirNadadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_añadirNadadorMouseClicked
+        if(tf_nombreNadador.getText().equals("") || cb_nacionalidad.getSelectedIndex() == -1 || cb_estiloNadador.getSelectedIndex() == -1 || cb_distanciaNadador.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(this, "Tiene que llenar todas las casillas!");
+        }
+        
+        else{
+            int cuenta = contarEstilos((Pais) cb_nacionalidad.getSelectedItem(), (String) cb_estiloNadador.getSelectedItem());
+            if(cuenta >= 2){
+                JOptionPane.showMessageDialog(this, "No puede agregar mas nadadores de este estilo al pais!");
+            }
+            
+            else{
+                Nadador n = new Nadador(tf_nombreNadador.getText(), 
+                    (Pais) cb_nacionalidad.getSelectedItem(), 
+                    (int) sp_edad.getModel().getValue(), 
+                    (double) sp_estatura.getModel().getValue(), 
+                    (String) cb_estiloNadador.getSelectedItem(), 
+                    (String) cb_distanciaNadador.getSelectedItem(), 
+                    (double) sp_recordNadador.getModel().getValue(), 
+                    (int) sp_medallasNadador.getModel().getValue());
+                nadadores.add(n);
+
+                File file = new File("./Nadadores.UWU");
+                FileOutputStream fo = null;
+                ObjectOutputStream os = null;
+                try {
+                    fo = new FileOutputStream(file,true);
+                    os = new ObjectOutputStream(fo);
+
+                    os.writeObject(n);
+                    os.flush();
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
+                try {
+                    fo.close();
+                    os.close();
+                } catch (Exception e2) {
+                }
+
+                tf_nombreNadador.setText("");
+                cb_nacionalidad.setSelectedIndex(-1);
+                sp_edad.getModel().setValue(18);
+                sp_estatura.getModel().setValue(1);
+                cb_distanciaNadador.setSelectedIndex(-1);
+                cb_estiloNadador.setSelectedIndex(-1);
+                sp_recordNadador.getModel().setValue(1);
+                sp_medallasNadador.getModel().setValue(0);
+                JOptionPane.showMessageDialog(this, "Nadador añadido exitosamente!");
+            }
+        }
+    }//GEN-LAST:event_bt_añadirNadadorMouseClicked
 
     /**
      * @param args the command line arguments
@@ -326,27 +492,53 @@ public class Main extends javax.swing.JFrame {
         });
     }
     
+    public static int contarEstilos(Pais p,String estilo){
+        int cc = 0;
+        for (Nadador nadador : p.getNadadores()) {
+            if(nadador.getEstilo().equals(estilo)){
+                cc ++;
+            }
+        }
+        return cc;
+    }
     ArrayList<Pais> paises = new ArrayList();
     ArrayList<Nadador> nadadores = new ArrayList();
     ArrayList<Evento> eventos = new ArrayList();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_añadirEvento;
+    private javax.swing.JButton bt_añadirNadador;
     private javax.swing.JButton bt_añadirPais;
     private javax.swing.JComboBox<String> cb_distanciaEvento;
+    private javax.swing.JComboBox<String> cb_distanciaNadador;
     private javax.swing.JComboBox<String> cb_estiloEvento;
+    private javax.swing.JComboBox<String> cb_estiloNadador;
+    private javax.swing.JComboBox<String> cb_nacionalidad;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel jp_añadirEvento;
     private javax.swing.JPanel jp_añadirNadador;
     private javax.swing.JPanel jp_añadirPais;
     private javax.swing.JPanel jp_listar;
     private javax.swing.JPanel jp_simulacion;
+    private javax.swing.JSpinner sp_edad;
+    private javax.swing.JSpinner sp_estatura;
+    private javax.swing.JSpinner sp_medallasNadador;
     private javax.swing.JSpinner sp_medallasPais;
     private javax.swing.JSpinner sp_recordEvento;
+    private javax.swing.JSpinner sp_recordNadador;
+    private javax.swing.JTextField tf_nombreNadador;
     private javax.swing.JTextField tf_nombrePais;
     // End of variables declaration//GEN-END:variables
 }

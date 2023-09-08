@@ -24,7 +24,7 @@ public class Pais implements Serializable{
         this.nombre = Nombre;
     }
 
-    public ArrayList getNadadores() {
+    public ArrayList<Nadador> getNadadores() {
         return nadadores;
     }
 
