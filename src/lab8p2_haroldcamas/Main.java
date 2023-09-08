@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package lab8p2_haroldcamas;
 
 import java.io.EOFException;
@@ -17,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -58,17 +55,17 @@ public class Main extends javax.swing.JFrame {
         try {
             if(eventosA.exists()){
             Evento temp = null;
-            fo = new FileInputStream(eventosA);
-            os = new ObjectInputStream(fo);
+            FileInputStream fo2 = new FileInputStream(eventosA);
+            ObjectInputStream os2 = new ObjectInputStream(fo2);
             
             try {
-                while ((temp = (Evento) os.readObject()) != null) {
+                while ((temp = (Evento) os2.readObject()) != null) {
                     eventos.add(temp);
                 }
             } catch (EOFException e) {
             }
-            fo.close();
-            os.close();
+            fo2.close();
+            os2.close();
         }
         } catch (Exception e) {
         }
@@ -76,22 +73,27 @@ public class Main extends javax.swing.JFrame {
         try {
             if(nadadoresA.exists()){
             Nadador temp = null;
-            fo = new FileInputStream(eventosA);
-            os = new ObjectInputStream(fo);
+            FileInputStream fo3 = new FileInputStream(nadadoresA);
+            ObjectInputStream os3 = new ObjectInputStream(fo3);
             
             try {
-                while ((temp = (Nadador) os.readObject()) != null) {
+                while ((temp = (Nadador) os3.readObject()) != null) {
                     nadadores.add(temp);
                 }
             } catch (EOFException e) {
             }
-            fo.close();
-            os.close();
+            fo3.close();
+            os3.close();
         }
         } catch (Exception e) {
         }
         
         cb_nacionalidad.setModel(refrescarModelo(paises, (DefaultComboBoxModel) cb_nacionalidad.getModel()));
+        cb_listarNadadoresP.setModel(refrescarModelo(paises, (DefaultComboBoxModel) cb_listarNadadoresP.getModel()));
+        
+        System.out.println(paises);
+        System.out.println(eventos);
+        System.out.println(nadadores);
     }
 
     /**
@@ -137,6 +139,15 @@ public class Main extends javax.swing.JFrame {
         sp_medallasNadador = new javax.swing.JSpinner();
         bt_añadirNadador = new javax.swing.JButton();
         jp_listar = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tb_tablaNadadores = new javax.swing.JTable();
+        jLabel14 = new javax.swing.JLabel();
+        cb_listarNadadoresP = new javax.swing.JComboBox<>();
+        bt_listarNadadores = new javax.swing.JButton();
+        jp_listarEventos = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel15 = new javax.swing.JLabel();
         jp_simulacion = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -364,18 +375,132 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Agregar Nadador", jp_añadirNadador);
 
+        tb_tablaNadadores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Edad", "Estatura", "Estilo", "Distancia", "Tiempo Record", "Medallas"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tb_tablaNadadores);
+
+        jLabel14.setText("Nadadores");
+
+        bt_listarNadadores.setText("Listar Nadadores");
+        bt_listarNadadores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_listarNadadoresMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jp_listarLayout = new javax.swing.GroupLayout(jp_listar);
         jp_listar.setLayout(jp_listarLayout);
         jp_listarLayout.setHorizontalGroup(
             jp_listarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 801, Short.MAX_VALUE)
+            .addGroup(jp_listarLayout.createSequentialGroup()
+                .addGroup(jp_listarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jp_listarLayout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(cb_listarNadadoresP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jp_listarLayout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(bt_listarNadadores)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(91, 91, 91))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_listarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel14)
+                .addGap(289, 289, 289))
         );
         jp_listarLayout.setVerticalGroup(
             jp_listarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
+            .addGroup(jp_listarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel14)
+                .addGap(28, 28, 28)
+                .addGroup(jp_listarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jp_listarLayout.createSequentialGroup()
+                        .addComponent(cb_listarNadadoresP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63)
+                        .addComponent(bt_listarNadadores)))
+                .addContainerGap(257, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Listar", jp_listar);
+        jTabbedPane1.addTab("Listar Nadadores", jp_listar);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Estilo", "Distancia", "Record"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
+
+        jLabel15.setText("Eventos");
+
+        javax.swing.GroupLayout jp_listarEventosLayout = new javax.swing.GroupLayout(jp_listarEventos);
+        jp_listarEventos.setLayout(jp_listarEventosLayout);
+        jp_listarEventosLayout.setHorizontalGroup(
+            jp_listarEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_listarEventosLayout.createSequentialGroup()
+                .addContainerGap(332, Short.MAX_VALUE)
+                .addGroup(jp_listarEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_listarEventosLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_listarEventosLayout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addGap(218, 218, 218))))
+        );
+        jp_listarEventosLayout.setVerticalGroup(
+            jp_listarEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_listarEventosLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel15)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(263, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Listar Eventos", jp_listarEventos);
 
         javax.swing.GroupLayout jp_simulacionLayout = new javax.swing.GroupLayout(jp_simulacion);
         jp_simulacion.setLayout(jp_simulacionLayout);
@@ -418,9 +543,9 @@ public class Main extends javax.swing.JFrame {
             ObjectOutputStream os = null;
             
             try {
+                fo = new FileOutputStream(file);
+                os = new ObjectOutputStream(fo);
                 for (Pais paise : paises) {
-                    fo = new FileOutputStream(file,true);
-                    os = new ObjectOutputStream(fo);
                     os.writeObject(paise);
                 }
                 
@@ -438,6 +563,7 @@ public class Main extends javax.swing.JFrame {
             sp_medallasPais.getModel().setValue(0);
             JOptionPane.showMessageDialog(this, "Pais añadido exitosamente!");
             cb_nacionalidad.setModel(refrescarModelo(paises, (DefaultComboBoxModel) cb_nacionalidad.getModel()));
+            cb_listarNadadoresP.setModel(refrescarModelo(paises, (DefaultComboBoxModel) cb_listarNadadoresP.getModel()));
         }
     }//GEN-LAST:event_bt_añadirPaisMouseClicked
 
@@ -455,9 +581,9 @@ public class Main extends javax.swing.JFrame {
             FileOutputStream fo = null;
             ObjectOutputStream os = null;
             try {
+                fo = new FileOutputStream(file);
+                os = new ObjectOutputStream(fo);
                 for (Evento evento : eventos) {
-                    fo = new FileOutputStream(file,true);
-                    os = new ObjectOutputStream(fo);
                     os.writeObject(evento);
                 }
                 
@@ -505,9 +631,9 @@ public class Main extends javax.swing.JFrame {
                 FileOutputStream fo = null;
                 ObjectOutputStream os = null;
                 try {
+                    fo = new FileOutputStream(file);
+                    os = new ObjectOutputStream(fo);
                     for (Nadador nadadore : nadadores) {
-                        fo = new FileOutputStream(file,true);
-                        os = new ObjectOutputStream(fo);
                         os.writeObject(nadadore);
                     }
                     
@@ -533,6 +659,29 @@ public class Main extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_bt_añadirNadadorMouseClicked
+
+    private void bt_listarNadadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_listarNadadoresMouseClicked
+        if(cb_listarNadadoresP.getSelectedIndex() != -1){
+            DefaultTableModel modelo = (DefaultTableModel) tb_tablaNadadores.getModel();
+            Pais elegido = (Pais) cb_listarNadadoresP.getSelectedItem();
+
+            for (Nadador n : elegido.getNadadores()) {
+                Object[] lista = {n.getNombre(),
+                n.getNacionalidad(),
+                n.getEdad(),
+                n.getEstatura(),
+                n.getEstilo(),
+                n.getDistancia(),
+                n.getRecord(),
+                n.getMedallas()};
+                modelo.addRow(lista);
+            }
+            tb_tablaNadadores.setModel(modelo);
+            }
+        else{
+            JOptionPane.showMessageDialog(this, "Tiene que elegir un pais primero!");
+        }
+    }//GEN-LAST:event_bt_listarNadadoresMouseClicked
 
     /**
      * @param args the command line arguments
@@ -600,16 +749,20 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton bt_añadirEvento;
     private javax.swing.JButton bt_añadirNadador;
     private javax.swing.JButton bt_añadirPais;
+    private javax.swing.JButton bt_listarNadadores;
     private javax.swing.JComboBox<String> cb_distanciaEvento;
     private javax.swing.JComboBox<String> cb_distanciaNadador;
     private javax.swing.JComboBox<String> cb_estiloEvento;
     private javax.swing.JComboBox<String> cb_estiloNadador;
+    private javax.swing.JComboBox<String> cb_listarNadadoresP;
     private javax.swing.JComboBox<String> cb_nacionalidad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -618,11 +771,15 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JPanel jp_añadirEvento;
     private javax.swing.JPanel jp_añadirNadador;
     private javax.swing.JPanel jp_añadirPais;
     private javax.swing.JPanel jp_listar;
+    private javax.swing.JPanel jp_listarEventos;
     private javax.swing.JPanel jp_simulacion;
     private javax.swing.JSpinner sp_edad;
     private javax.swing.JSpinner sp_estatura;
@@ -630,6 +787,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JSpinner sp_medallasPais;
     private javax.swing.JSpinner sp_recordEvento;
     private javax.swing.JSpinner sp_recordNadador;
+    private javax.swing.JTable tb_tablaNadadores;
     private javax.swing.JTextField tf_nombreNadador;
     private javax.swing.JTextField tf_nombrePais;
     // End of variables declaration//GEN-END:variables
