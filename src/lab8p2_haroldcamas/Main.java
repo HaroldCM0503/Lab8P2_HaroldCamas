@@ -162,6 +162,9 @@ public class Main extends javax.swing.JFrame {
         bt_añadirNadadorS = new javax.swing.JButton();
         bt_empezarEvento = new javax.swing.JButton();
         bt_elegirEvento = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -546,17 +549,16 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jLabel18.setText("Nadador 1");
+
+        jLabel19.setText("Nadador 2 ");
+
+        jLabel20.setText("Nadador 3");
+
         javax.swing.GroupLayout jp_simulacionLayout = new javax.swing.GroupLayout(jp_simulacion);
         jp_simulacion.setLayout(jp_simulacionLayout);
         jp_simulacionLayout.setHorizontalGroup(
             jp_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jp_simulacionLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jp_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pg_piscina1, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
-                    .addComponent(pg_piscina2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pg_piscina3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_simulacionLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bt_empezarEvento)
@@ -564,23 +566,35 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jp_simulacionLayout.createSequentialGroup()
                 .addGroup(jp_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jp_simulacionLayout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addComponent(jLabel16))
+                        .addGap(74, 74, 74)
+                        .addGroup(jp_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel18)
+                            .addComponent(jLabel19)
+                            .addComponent(jLabel20))
+                        .addGap(75, 75, 75)
+                        .addGroup(jp_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pg_piscina1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pg_piscina2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pg_piscina3, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jp_simulacionLayout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addComponent(cb_eventosSimulacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(123, 123, 123)
-                .addGroup(jp_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jp_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jp_simulacionLayout.createSequentialGroup()
+                                .addGap(124, 124, 124)
+                                .addComponent(jLabel16))
+                            .addGroup(jp_simulacionLayout.createSequentialGroup()
+                                .addGap(108, 108, 108)
+                                .addComponent(cb_eventosSimulacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(123, 123, 123)
+                        .addGroup(jp_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jp_simulacionLayout.createSequentialGroup()
+                                .addComponent(cb_nadadoresSimulacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(55, 55, 55)
+                                .addComponent(bt_añadirNadadorS))
+                            .addComponent(jLabel17)))
                     .addGroup(jp_simulacionLayout.createSequentialGroup()
-                        .addComponent(cb_nadadoresSimulacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55)
-                        .addComponent(bt_añadirNadadorS))
-                    .addComponent(jLabel17))
-                .addContainerGap(255, Short.MAX_VALUE))
-            .addGroup(jp_simulacionLayout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addComponent(bt_elegirEvento)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(91, 91, 91)
+                        .addComponent(bt_elegirEvento)))
+                .addContainerGap(174, Short.MAX_VALUE))
         );
         jp_simulacionLayout.setVerticalGroup(
             jp_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -597,13 +611,25 @@ public class Main extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(bt_elegirEvento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addComponent(bt_empezarEvento)
-                .addGap(18, 18, 18)
-                .addComponent(pg_piscina1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(pg_piscina2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(pg_piscina3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jp_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_simulacionLayout.createSequentialGroup()
+                        .addComponent(bt_empezarEvento)
+                        .addGroup(jp_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jp_simulacionLayout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addGroup(jp_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jp_simulacionLayout.createSequentialGroup()
+                                        .addComponent(jLabel18)
+                                        .addGap(48, 48, 48))
+                                    .addComponent(jLabel19)))
+                            .addGroup(jp_simulacionLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(pg_piscina1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(pg_piscina2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(pg_piscina3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(145, 145, 145))
         );
 
@@ -613,7 +639,7 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -806,7 +832,7 @@ public class Main extends javax.swing.JFrame {
             barras.add(pg_piscina2);
             barras.add(pg_piscina3);
             
-            Simulacion simu = new Simulacion(nadadores, barras);
+            Simulacion simu = new Simulacion(competidores, barras);
             simu.start();
             
         }
@@ -904,7 +930,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
