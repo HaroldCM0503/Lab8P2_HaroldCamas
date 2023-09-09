@@ -37,13 +37,17 @@ public class Simulacion extends Thread{
     @Override
     public void run(){
         while(vive){
-            while(true){
+           
                 Random rand = new Random();
                 for (int i = 0; i < nadadores.size(); i++) {
                     int paso = rand.nextInt(10) + 1;
                     barras.get(i).setValue(barras.get(i).getValue() + paso);
-                    if(barras.get(0).getValue() >= 100 || barras.get(1).getValue() >= 100|| barras.get(2).getValue() >= 100){
+                    
+                    if(barras.get(i).getValue() >= 100){
                         vive = false;
+                        if(barras.get(0).getValue() >= 100){
+                            
+                        }
                         break;
                     }
                 }
@@ -51,7 +55,6 @@ public class Simulacion extends Thread{
                     Thread.sleep(1000);
                 } catch (Exception e) {
                 }
-            }
         }
     }
 }

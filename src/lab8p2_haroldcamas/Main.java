@@ -800,7 +800,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_añadirNadadorSMouseClicked
 
     private void bt_empezarEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_empezarEventoMouseClicked
-        if(competidores.size() < 2){
+        if(competidores.size() >= 2){
             ArrayList<JProgressBar> barras = new ArrayList();
             barras.add(pg_piscina1);
             barras.add(pg_piscina2);
@@ -808,6 +808,10 @@ public class Main extends javax.swing.JFrame {
             
             Simulacion simu = new Simulacion(nadadores, barras);
             simu.start();
+            
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Tiene que elegir los competidores");
         }
     }//GEN-LAST:event_bt_empezarEventoMouseClicked
 
