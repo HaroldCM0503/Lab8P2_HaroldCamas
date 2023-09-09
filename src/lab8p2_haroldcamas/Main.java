@@ -27,75 +27,71 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() throws FileNotFoundException, IOException, ClassNotFoundException {
         initComponents();
-        
+
         FileInputStream fo = null;
         ObjectInputStream os = null;
-        
+
         File paisesA = new File("./PaisesParticipantes.UWU");
         File eventosA = new File("./Eventos.UWU");
         File nadadoresA = new File("./Nadadores.UWU");
-        
+
         try {
-            if(paisesA.exists()){
-            Pais temp = null;
-            fo = new FileInputStream(paisesA);
-            os = new ObjectInputStream(fo);
-            
-            try {
-                while ((temp = (Pais) os.readObject()) != null) {
-                    paises.add(temp);
+            if (paisesA.exists()) {
+                Pais temp = null;
+                fo = new FileInputStream(paisesA);
+                os = new ObjectInputStream(fo);
+
+                try {
+                    while ((temp = (Pais) os.readObject()) != null) {
+                        paises.add(temp);
+                    }
+                } catch (EOFException e) {
                 }
-            } catch (EOFException e) {
+                fo.close();
+                os.close();
             }
-            fo.close();
-            os.close();
-        }
         } catch (Exception e) {
         }
-        
+
         try {
-            if(eventosA.exists()){
-            Evento temp = null;
-            FileInputStream fo2 = new FileInputStream(eventosA);
-            ObjectInputStream os2 = new ObjectInputStream(fo2);
-            
-            try {
-                while ((temp = (Evento) os2.readObject()) != null) {
-                    eventos.add(temp);
+            if (eventosA.exists()) {
+                Evento temp = null;
+                FileInputStream fo2 = new FileInputStream(eventosA);
+                ObjectInputStream os2 = new ObjectInputStream(fo2);
+
+                try {
+                    while ((temp = (Evento) os2.readObject()) != null) {
+                        eventos.add(temp);
+                    }
+                } catch (EOFException e) {
                 }
-            } catch (EOFException e) {
+                fo2.close();
+                os2.close();
             }
-            fo2.close();
-            os2.close();
-        }
         } catch (Exception e) {
         }
-        
+
         try {
-            if(nadadoresA.exists()){
-            Nadador temp = null;
-            FileInputStream fo3 = new FileInputStream(nadadoresA);
-            ObjectInputStream os3 = new ObjectInputStream(fo3);
-            
-            try {
-                while ((temp = (Nadador) os3.readObject()) != null) {
-                    nadadores.add(temp);
+            if (nadadoresA.exists()) {
+                Nadador temp = null;
+                FileInputStream fo3 = new FileInputStream(nadadoresA);
+                ObjectInputStream os3 = new ObjectInputStream(fo3);
+
+                try {
+                    while ((temp = (Nadador) os3.readObject()) != null) {
+                        nadadores.add(temp);
+                    }
+                } catch (EOFException e) {
                 }
-            } catch (EOFException e) {
+                fo3.close();
+                os3.close();
             }
-            fo3.close();
-            os3.close();
-        }
         } catch (Exception e) {
         }
-        
+
         cb_nacionalidad.setModel(refrescarModelo(paises, (DefaultComboBoxModel) cb_nacionalidad.getModel()));
         cb_listarNadadoresP.setModel(refrescarModelo(paises, (DefaultComboBoxModel) cb_listarNadadoresP.getModel()));
         cb_eventosSimulacion.setModel(refrescarModelo(eventos, (DefaultComboBoxModel) cb_eventosSimulacion.getModel()));
-        
-        System.out.println(paises);
-        System.out.println(eventos);
-        System.out.println(nadadores);
     }
 
     /**
@@ -150,7 +146,7 @@ public class Main extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_tablaEventos = new javax.swing.JTable();
         jLabel15 = new javax.swing.JLabel();
-        cb_eventosListar = new javax.swing.JComboBox<>();
+        bt_refrescarEventos = new javax.swing.JButton();
         jp_simulacion = new javax.swing.JPanel();
         pg_piscina1 = new javax.swing.JProgressBar();
         pg_piscina2 = new javax.swing.JProgressBar();
@@ -402,16 +398,9 @@ public class Main extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
             };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(tb_tablaNadadores);
@@ -464,10 +453,7 @@ public class Main extends javax.swing.JFrame {
 
         tb_tablaEventos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Estilo", "Distancia", "Record"
@@ -476,50 +462,49 @@ public class Main extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Double.class
             };
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         jScrollPane2.setViewportView(tb_tablaEventos);
 
         jLabel15.setText("Eventos");
 
+        bt_refrescarEventos.setText("Refrescar");
+        bt_refrescarEventos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_refrescarEventosMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jp_listarEventosLayout = new javax.swing.GroupLayout(jp_listarEventos);
         jp_listarEventos.setLayout(jp_listarEventosLayout);
         jp_listarEventosLayout.setHorizontalGroup(
             jp_listarEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jp_listarEventosLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel15)
-                .addGap(218, 218, 218))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_listarEventosLayout.createSequentialGroup()
-                .addGap(121, 121, 121)
-                .addComponent(cb_eventosListar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addContainerGap(185, Short.MAX_VALUE)
+                .addGroup(jp_listarEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_listarEventosLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(164, 164, 164))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_listarEventosLayout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addGap(367, 367, 367))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_listarEventosLayout.createSequentialGroup()
+                        .addComponent(bt_refrescarEventos)
+                        .addGap(348, 348, 348))))
         );
         jp_listarEventosLayout.setVerticalGroup(
             jp_listarEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jp_listarEventosLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jLabel15)
-                .addGroup(jp_listarEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jp_listarEventosLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jp_listarEventosLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(cb_eventosListar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(263, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(bt_refrescarEventos)
+                .addContainerGap(213, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Listar Eventos", jp_listarEventos);
@@ -639,7 +624,7 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -650,25 +635,24 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_añadirPaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_añadirPaisMouseClicked
-        if(tf_nombrePais.getText().equals("") || (int) sp_medallasPais.getModel().getValue() < 0){
+        if (tf_nombrePais.getText().equals("") || (int) sp_medallasPais.getModel().getValue() < 0) {
             JOptionPane.showMessageDialog(this, "Tiene que llenar todas las casillas!");
-        }
-        else{
-            Pais p = new Pais(tf_nombrePais.getText(), 
+        } else {
+            Pais p = new Pais(tf_nombrePais.getText(),
                     (int) sp_medallasPais.getModel().getValue());
             paises.add(p);
-            
+
             File file = new File("./PaisesParticipantes.UWU");
             FileOutputStream fo = null;
             ObjectOutputStream os = null;
-            
+
             try {
                 fo = new FileOutputStream(file);
                 os = new ObjectOutputStream(fo);
                 for (Pais paise : paises) {
                     os.writeObject(paise);
                 }
-                
+
                 os.flush();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -678,7 +662,7 @@ public class Main extends javax.swing.JFrame {
                 os.close();
             } catch (Exception e) {
             }
-            
+
             tf_nombrePais.setText("");
             sp_medallasPais.getModel().setValue(0);
             JOptionPane.showMessageDialog(this, "Pais añadido exitosamente!");
@@ -688,15 +672,14 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_añadirPaisMouseClicked
 
     private void bt_añadirEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_añadirEventoMouseClicked
-        if(cb_distanciaEvento.getSelectedIndex() < 0 || cb_estiloEvento.getSelectedIndex() < 0 || (double) sp_recordEvento.getModel().getValue() == 0){
+        if (cb_distanciaEvento.getSelectedIndex() < 0 || cb_estiloEvento.getSelectedIndex() < 0 || (double) sp_recordEvento.getModel().getValue() == 0) {
             JOptionPane.showMessageDialog(this, "Tiene que llenar las casillas!");
-        }
-        else{
-            Evento e = new Evento((String) cb_estiloEvento.getSelectedItem(), 
-                    (String) cb_estiloEvento.getSelectedItem(), 
+        } else {
+            Evento e = new Evento((String) cb_estiloEvento.getSelectedItem(),
+                    (String) cb_estiloEvento.getSelectedItem(),
                     (double) sp_recordEvento.getModel().getValue());
             eventos.add(e);
-            
+
             File file = new File("./Eventos.UWU");
             FileOutputStream fo = null;
             ObjectOutputStream os = null;
@@ -706,7 +689,7 @@ public class Main extends javax.swing.JFrame {
                 for (Evento evento : eventos) {
                     os.writeObject(evento);
                 }
-                
+
                 os.flush();
             } catch (Exception e2) {
                 e2.printStackTrace();
@@ -716,7 +699,7 @@ public class Main extends javax.swing.JFrame {
                 os.close();
             } catch (Exception e2) {
             }
-            
+
             cb_distanciaEvento.setSelectedIndex(-1);
             cb_estiloEvento.setSelectedIndex(-1);
             sp_recordEvento.getModel().setValue(0);
@@ -726,27 +709,25 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_añadirEventoMouseClicked
 
     private void bt_añadirNadadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_añadirNadadorMouseClicked
-        if(tf_nombreNadador.getText().equals("") || cb_nacionalidad.getSelectedIndex() == -1 || cb_estiloNadador.getSelectedIndex() == -1 || cb_distanciaNadador.getSelectedIndex() == -1){
+        if (tf_nombreNadador.getText().equals("") || cb_nacionalidad.getSelectedIndex() == -1 || cb_estiloNadador.getSelectedIndex() == -1 || cb_distanciaNadador.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(this, "Tiene que llenar todas las casillas!");
-        }
-        
-        else{
+        } else {
             int cuenta = contarEstilos((Pais) cb_nacionalidad.getSelectedItem(), (String) cb_estiloNadador.getSelectedItem());
-            if(cuenta >= 2){
+            if (cuenta >= 2) {
                 JOptionPane.showMessageDialog(this, "No puede agregar mas nadadores de este estilo al pais!");
-            }
-            
-            else{
-                Nadador n = new Nadador(tf_nombreNadador.getText(), 
-                    (Pais) cb_nacionalidad.getSelectedItem(), 
-                    (int) sp_edad.getModel().getValue(), 
-                    (double) sp_estatura.getModel().getValue(), 
-                    (String) cb_estiloNadador.getSelectedItem(), 
-                    (String) cb_distanciaNadador.getSelectedItem(), 
-                    (double) sp_recordNadador.getModel().getValue(), 
-                    (int) sp_medallasNadador.getModel().getValue());
+            } else {
+                Nadador n = new Nadador(tf_nombreNadador.getText(),
+                        (Pais) cb_nacionalidad.getSelectedItem(),
+                        (int) sp_edad.getModel().getValue(),
+                        (double) sp_estatura.getModel().getValue(),
+                        (String) cb_estiloNadador.getSelectedItem(),
+                        (String) cb_distanciaNadador.getSelectedItem(),
+                        (double) sp_recordNadador.getModel().getValue(),
+                        (int) sp_medallasNadador.getModel().getValue());
                 nadadores.add(n);
-                ((Pais) cb_nacionalidad.getSelectedItem()).getNadadores().add(n);
+                DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_nacionalidad.getModel();
+                int indice = cb_nacionalidad.getSelectedIndex();
+                ((Pais) modelo.getElementAt(indice)).setNadadores(n);
 
                 File file = new File("./Nadadores.UWU");
                 FileOutputStream fo = null;
@@ -757,7 +738,7 @@ public class Main extends javax.swing.JFrame {
                     for (Nadador nadadore : nadadores) {
                         os.writeObject(nadadore);
                     }
-                    
+
                     os.flush();
                 } catch (Exception e2) {
                     e2.printStackTrace();
@@ -782,35 +763,38 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_añadirNadadorMouseClicked
 
     private void bt_listarNadadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_listarNadadoresMouseClicked
-        if(cb_listarNadadoresP.getSelectedIndex() != -1){
+        if (cb_listarNadadoresP.getSelectedIndex() != -1) {
             DefaultTableModel modelo = (DefaultTableModel) tb_tablaNadadores.getModel();
-            Pais elegido = (Pais) cb_listarNadadoresP.getSelectedItem();
+            while (modelo.getRowCount() > 0) {
+                modelo.removeRow(0);
+            }
+            DefaultComboBoxModel m = (DefaultComboBoxModel) cb_listarNadadoresP.getModel();
+            int indice = cb_listarNadadoresP.getSelectedIndex();
+            Pais elegido = (Pais) m.getElementAt(indice);
 
-            for (Nadador n : elegido.getNadadores()) {
+            for (Nadador n : nadadores) {
                 Object[] lista = {n.getNombre(),
-                n.getNacionalidad(),
-                n.getEdad(),
-                n.getEstatura(),
-                n.getEstilo(),
-                n.getDistancia(),
-                n.getRecord(),
-                n.getMedallas()};
+                    n.getEdad(),
+                    n.getEstatura(),
+                    n.getEstilo(),
+                    n.getDistancia(),
+                    n.getRecord(),
+                    n.getMedallas()};
                 modelo.addRow(lista);
             }
             tb_tablaNadadores.setModel(modelo);
-            }
-        else{
+        } else {
             JOptionPane.showMessageDialog(this, "Tiene que elegir un pais primero!");
         }
     }//GEN-LAST:event_bt_listarNadadoresMouseClicked
 
     private void bt_elegirEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_elegirEventoMouseClicked
-        if(cb_eventosSimulacion.getSelectedIndex() != -1){
+        if (cb_eventosSimulacion.getSelectedIndex() != -1) {
             DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_nadadoresSimulacion.getModel();
             modelo.removeAllElements();
             for (Nadador n : nadadores) {
-                if(n.getEstilo().equals(((Evento) cb_eventosSimulacion.getSelectedItem()).getEstilo()) ||
-                        n.getDistancia().equals(((Evento) cb_eventosSimulacion.getSelectedItem()).getDistancia())){
+                if (n.getEstilo().equals(((Evento) cb_eventosSimulacion.getSelectedItem()).getEstilo())
+                        || n.getDistancia().equals(((Evento) cb_eventosSimulacion.getSelectedItem()).getDistancia())) {
                     modelo.addElement(n);
                 }
             }
@@ -819,27 +803,42 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_elegirEventoMouseClicked
 
     private void bt_añadirNadadorSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_añadirNadadorSMouseClicked
-        if(competidores.size() != 3 && cb_nadadoresSimulacion.getSelectedIndex() != -1){
+        if (competidores.size() != 3 && cb_nadadoresSimulacion.getSelectedIndex() != -1) {
             competidores.add((Nadador) cb_nadadoresSimulacion.getSelectedItem());
             JOptionPane.showMessageDialog(this, "Nadador Añadido");
         }
     }//GEN-LAST:event_bt_añadirNadadorSMouseClicked
 
     private void bt_empezarEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_empezarEventoMouseClicked
-        if(competidores.size() >= 2){
+        if (competidores.size() >= 2) {
             ArrayList<JProgressBar> barras = new ArrayList();
             barras.add(pg_piscina1);
             barras.add(pg_piscina2);
             barras.add(pg_piscina3);
-            
+
             Simulacion simu = new Simulacion(competidores, barras);
             simu.start();
-            
-        }
-        else{
+
+        } else {
             JOptionPane.showMessageDialog(this, "Tiene que elegir los competidores");
         }
     }//GEN-LAST:event_bt_empezarEventoMouseClicked
+
+    private void bt_refrescarEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_refrescarEventosMouseClicked
+        DefaultTableModel modelo = (DefaultTableModel) tb_tablaEventos.getModel();
+        int cc = 0;
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(cc);
+        }
+
+        for (Evento evento : eventos) {
+            Object[] ob = {evento.getEstilo(),
+                evento.getDistancia(),
+                evento.getRecord()};
+            modelo.addRow(ob);
+        }
+        tb_tablaEventos.setModel(modelo);
+    }//GEN-LAST:event_bt_refrescarEventosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -881,25 +880,25 @@ public class Main extends javax.swing.JFrame {
             }
         });
     }
-    
-    public static int contarEstilos(Pais p,String estilo){
+
+    public static int contarEstilos(Pais p, String estilo) {
         int cc = 0;
         for (Nadador nadador : p.getNadadores()) {
-            if(nadador.getEstilo() == estilo){
-                cc ++;
+            if (nadador.getEstilo() == estilo) {
+                cc++;
             }
         }
         return cc;
     }
-    
-    public static DefaultComboBoxModel refrescarModelo(ArrayList lista, DefaultComboBoxModel modelo){
+
+    public static DefaultComboBoxModel refrescarModelo(ArrayList lista, DefaultComboBoxModel modelo) {
         modelo.removeAllElements();
         for (Object object : lista) {
             modelo.addElement(object);
         }
         return modelo;
     }
-    
+
     ArrayList<Pais> paises = new ArrayList();
     ArrayList<Nadador> nadadores = new ArrayList();
     ArrayList<Evento> eventos = new ArrayList();
@@ -912,11 +911,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton bt_elegirEvento;
     private javax.swing.JButton bt_empezarEvento;
     private javax.swing.JButton bt_listarNadadores;
+    private javax.swing.JButton bt_refrescarEventos;
     private javax.swing.JComboBox<String> cb_distanciaEvento;
     private javax.swing.JComboBox<String> cb_distanciaNadador;
     private javax.swing.JComboBox<String> cb_estiloEvento;
     private javax.swing.JComboBox<String> cb_estiloNadador;
-    private javax.swing.JComboBox<String> cb_eventosListar;
     private javax.swing.JComboBox<String> cb_eventosSimulacion;
     private javax.swing.JComboBox<String> cb_listarNadadoresP;
     private javax.swing.JComboBox<String> cb_nacionalidad;
